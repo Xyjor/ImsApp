@@ -75,6 +75,22 @@
     -fx-text-fill: #f87171;
 }
 
+.exit-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ef4444;
+    -fx-font-size: 13px;
+    -fx-padding: 10 14;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-radius: 8;
+    -fx-graphic-text-gap: 10;
+    -fx-border-color: transparent;
+}
+.exit-btn:hover {
+    -fx-background-color: rgba(239, 68, 68, 0.08);
+    -fx-text-fill: #fca5a5;
+}
+
 /* User info card at bottom of sidebar */
 .user-card {
     -fx-background-color: rgba(15, 23, 42, 0.8);

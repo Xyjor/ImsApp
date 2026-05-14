@@ -69,10 +69,25 @@ public class DashboardController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/imsapp/view/LoginView.fxml"));
                     javafx.scene.Parent root = loader.load();
                     javafx.stage.Stage stage = (javafx.stage.Stage) contentArea.getScene().getWindow();
-                    stage.setScene(new javafx.scene.Scene(root, 600, 400));
+                    javafx.geometry.Rectangle2D screen = javafx.stage.Screen.getPrimary().getVisualBounds();
+                    stage.setScene(new javafx.scene.Scene(root, screen.getWidth(), screen.getHeight()));
                     stage.setTitle("IMS - Login");
-                    stage.centerOnScreen();
+                    stage.setMaximized(true);
                 } catch (IOException e) { e.printStackTrace(); }
+            }
+        });
+    }
+
+    @FXML
+    private void handleExit() {
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+            "Are you sure you want to exit the application?",
+            ButtonType.YES, ButtonType.NO);
+        confirm.setTitle("Exit Application");
+        confirm.showAndWait().ifPresent(btn -> {
+            if (btn == ButtonType.YES) {
+                javafx.application.Platform.exit();
+                System.exit(0);
             }
         });
     }

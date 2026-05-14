@@ -67,6 +67,10 @@
                     onAction="#handleLogout" maxWidth="Infinity">
                 <graphic><FontAwesomeIconView glyphName="SIGN_OUT" size="1.1em" fill="#374151"/></graphic>
             </Button>
+            <Button text=" Exit App" styleClass="exit-btn"
+                    onAction="#handleExit" maxWidth="Infinity">
+                <graphic><FontAwesomeIconView glyphName="POWER_OFF" size="1.1em" fill="#ef4444"/></graphic>
+            </Button>
 
             <!-- User card -->
             <VBox styleClass="user-card" spacing="2">

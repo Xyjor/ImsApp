@@ -1,70 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
- */
 package imsapp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.net.URL;
 
-/** 
- * Main entry point for the Vehicle &amp; Driver IMS application.
- *
- * @author Xyjor
+/**
+ * Main entry point — Vehicle & Driver IMS.
+ * Launches in borderless fullscreen (undecorated + maximized).
  */
 public class ImsApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // Locate the Dashboard FXML resource
         URL fxmlUrl = getClass().getResource("/imsapp/view/LoginView.fxml");
+        if (fxmlUrl == null) fxmlUrl = getClass().getResource("view/LoginView.fxml");
         if (fxmlUrl == null) {
-            // Fallback: try relative path (same package)
-            fxmlUrl = getClass().getResource("view/LoginView.fxml");
-        }
-        if (fxmlUrl == null) {
-            System.err.println("ERROR: Could not find LoginView.fxml on the classpath.");
-            System.err.println("Make sure you do a full Clean & Build (not Run Single File).");
+            System.err.println("ERROR: LoginView.fxml not found on classpath.");
             return;
         }
 
         Parent root = FXMLLoader.load(fxmlUrl);
 
-        Scene scene = new Scene(root, 600, 400);
+        // Use screen bounds so the scene fills the entire display
+        javafx.geometry.Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+        Scene scene = new Scene(root, screen.getWidth(), screen.getHeight());
 
-        // Load CSS stylesheet
+        // Load CSS
         URL cssUrl = getClass().getResource("/imsapp/css/style.css");
-        if (cssUrl == null) {
-            cssUrl = getClass().getResource("css/style.css");
-        }
-        if (cssUrl != null) {
-            scene.getStylesheets().add(cssUrl.toExternalForm());
-        }
+        if (cssUrl == null) cssUrl = getClass().getResource("css/style.css");
+        if (cssUrl != null) scene.getStylesheets().add(cssUrl.toExternalForm());
 
+        // Borderless fullscreen: remove OS title bar, then maximize
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setTitle("Vehicle & Driver Information Management System");
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(900);
+        primaryStage.setMaximized(true);
+        primaryStage.setMinWidth(1024);
         primaryStage.setMinHeight(600);
         primaryStage.show();
     }
 
     @Override
     public void stop() {
-        // Close the database connection on application exit
         imsapp.util.DBConnection.closeConnection();
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
-
 }

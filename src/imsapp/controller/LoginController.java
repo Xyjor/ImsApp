@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -77,6 +79,20 @@ public class LoginController {
         }
     }
 
+    @FXML
+    private void handleExit() {
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+            "Are you sure you want to exit the application?",
+            ButtonType.YES, ButtonType.NO);
+        confirm.setTitle("Exit Application");
+        confirm.showAndWait().ifPresent(btn -> {
+            if (btn == ButtonType.YES) {
+                javafx.application.Platform.exit();
+                System.exit(0);
+            }
+        });
+    }
+
     private void showError(String msg) {
         lblError.setText(msg);
         lblError.setVisible(true);
@@ -87,10 +103,11 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/imsapp/view/Dashboard.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) txtUsername.getScene().getWindow();
-            stage.setScene(new Scene(root, 1100, 700));
-            // Fix #20: Update window title with logged-in user info
+            // Preserve screen size — don't override the maximized/fullscreen state
+            javafx.geometry.Rectangle2D screen = javafx.stage.Screen.getPrimary().getVisualBounds();
+            stage.setScene(new Scene(root, screen.getWidth(), screen.getHeight()));
             stage.setTitle("Vehicle & Driver IMS — " + user.getUsername() + " (" + user.getRole() + ")");
-            stage.centerOnScreen();
+            stage.setMaximized(true);
         } catch (IOException e) {
             e.printStackTrace();
             showError("Failed to load dashboard: " + e.getMessage());

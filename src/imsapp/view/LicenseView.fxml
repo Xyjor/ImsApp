@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="imsapp.controller.LicenseController"
+      spacing="16" styleClass="module-pane">
+    <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="Driver's Licenses" styleClass="module-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="lblEligibility" text="Select a customer to check eligibility"
+               styleClass="eligibility-label"/>
+    </HBox>
+
+    <GridPane hgap="12" vgap="10" styleClass="form-grid">
+        <Label text="License Holder" styleClass="section-header" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
+        
+        <Label text="Customer:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="cmbCustomer" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="250"/>
+
+        <Label text="License Details" styleClass="section-header" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="4">
+            <GridPane.margin><Insets top="10"/></GridPane.margin>
+        </Label>
+        
+        <Label text="License No:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtLicenseNo" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="200"/>
+
+        <Label text="License Type:" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+        <ComboBox fx:id="cmbLicenseType" GridPane.rowIndex="3" GridPane.columnIndex="3" prefWidth="250"/>
+
+        <Label text="Issue Date:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <DatePicker fx:id="dpIssueDate" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <Label text="Expiry Date:" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+        <DatePicker fx:id="dpExpiryDate" GridPane.rowIndex="4" GridPane.columnIndex="3"/>
+
+        <Label text="Status:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="cmbStatus" GridPane.rowIndex="5" GridPane.columnIndex="1" prefWidth="200"/>
+
+        <Label text="Restrictions &amp; Conditions" styleClass="section-header" GridPane.rowIndex="6" GridPane.columnIndex="0" GridPane.columnSpan="4">
+            <GridPane.margin><Insets top="10"/></GridPane.margin>
+        </Label>
+        
+        <Label text="Restrictions:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtRestriction" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+        <Label text="Conditions:" GridPane.rowIndex="7" GridPane.columnIndex="2"/>
+        <TextField fx:id="txtConditions" GridPane.rowIndex="7" GridPane.columnIndex="3"/>
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text=" Save" styleClass="btn-primary" onAction="#handleSave">
+            <graphic><FontAwesomeIconView glyphName="SAVE" fill="white"/></graphic>
+        </Button>
+        <Button text=" Update" styleClass="btn-secondary" onAction="#handleUpdate">
+            <graphic><FontAwesomeIconView glyphName="EDIT" fill="#a8b2d1"/></graphic>
+        </Button>
+        <Button text=" Delete" styleClass="btn-danger" onAction="#handleDelete">
+            <graphic><FontAwesomeIconView glyphName="TRASH" fill="#e94560"/></graphic>
+        </Button>
+        <Button text=" Clear" styleClass="btn-outline" onAction="#handleClear">
+            <graphic><FontAwesomeIconView glyphName="ERASER" fill="#8892b0"/></graphic>
+        </Button>
+        <Button text=" Export CSV" styleClass="btn-secondary" onAction="#handleExport">
+            <graphic><FontAwesomeIconView glyphName="FILE_EXCEL_ALT" fill="#a8b2d1"/></graphic>
+        </Button>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox alignment="CENTER" spacing="5">
+            <FontAwesomeIconView glyphName="SEARCH" fill="#8892b0"/>
+            <TextField fx:id="txtSearch" promptText="Search Licenses..." prefWidth="250"/>
+        </HBox>
+    </HBox>
+
+    <TableView fx:id="tblLicenses" VBox.vgrow="ALWAYS" styleClass="data-table">
+        <placeholder>
+            <Label text="No license records found."/>
+        </placeholder>
+        <columns>
+            <TableColumn text="ID" prefWidth="50">
+                <cellValueFactory><PropertyValueFactory property="licenseId"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="License No" prefWidth="140">
+                <cellValueFactory><PropertyValueFactory property="licenseNumber"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Type" prefWidth="120">
+                <cellValueFactory><PropertyValueFactory property="licenseType"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Issue Date" prefWidth="110">
+                <cellValueFactory><PropertyValueFactory property="issueDate"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Expiry Date" prefWidth="110">
+                <cellValueFactory><PropertyValueFactory property="expiryDate"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Status" prefWidth="100">
+                <cellValueFactory><PropertyValueFactory property="status"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</VBox>

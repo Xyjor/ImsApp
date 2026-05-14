@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="imsapp.controller.PaymentController"
+      spacing="16" styleClass="module-pane">
+    <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+
+    <Label text="Payments / Official Receipts" styleClass="module-title"/>
+
+    <GridPane hgap="12" vgap="10" styleClass="form-grid">
+        <Label text="Transaction Source" styleClass="section-header" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
+        
+        <Label text="Customer:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="cmbCustomer" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="250"/>
+
+        <Label text="Vehicle:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+        <ComboBox fx:id="cmbVehicle" GridPane.rowIndex="1" GridPane.columnIndex="3" prefWidth="250"/>
+
+        <Label text="Payment Details" styleClass="section-header" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="4">
+            <GridPane.margin><Insets top="10"/></GridPane.margin>
+        </Label>
+
+        <Label text="Payment Type:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="cmbPaymentType" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="250"/>
+
+        <Label text="Payment Method:" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+        <ComboBox fx:id="cmbPaymentMethod" GridPane.rowIndex="3" GridPane.columnIndex="3" prefWidth="250"/>
+
+        <Label text="Amount (PHP):" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtAmount" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <Label text="Remarks:" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+        <TextField fx:id="txtRemarks" GridPane.rowIndex="4" GridPane.columnIndex="3"/>
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text=" Save Payment" styleClass="btn-primary" onAction="#handleSavePayment">
+            <graphic><FontAwesomeIconView glyphName="SAVE" fill="white"/></graphic>
+        </Button>
+        <Button text=" Delete" styleClass="btn-danger" onAction="#handleDelete">
+            <graphic><FontAwesomeIconView glyphName="TRASH" fill="#e94560"/></graphic>
+        </Button>
+        <Button text=" Clear" styleClass="btn-outline" onAction="#handleClear">
+            <graphic><FontAwesomeIconView glyphName="ERASER" fill="#8892b0"/></graphic>
+        </Button>
+        <Button text=" Export CSV" styleClass="btn-secondary" onAction="#handleExport">
+            <graphic><FontAwesomeIconView glyphName="FILE_EXCEL_ALT" fill="#a8b2d1"/></graphic>
+        </Button>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox alignment="CENTER" spacing="5">
+            <FontAwesomeIconView glyphName="SEARCH" fill="#8892b0"/>
+            <TextField fx:id="txtSearch" promptText="Search Transaction ID..." prefWidth="250"/>
+        </HBox>
+    </HBox>
+
+    <TableView fx:id="tblPayments" VBox.vgrow="ALWAYS" styleClass="data-table">
+        <placeholder>
+            <Label text="No payment records found."/>
+        </placeholder>
+        <columns>
+            <TableColumn text="Transaction ID" prefWidth="160">
+                <cellValueFactory><PropertyValueFactory property="transactionId"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Type" prefWidth="110">
+                <cellValueFactory><PropertyValueFactory property="paymentType"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Method" prefWidth="110">
+                <cellValueFactory><PropertyValueFactory property="paymentMethod"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Amount" prefWidth="120">
+                <cellValueFactory><PropertyValueFactory property="amount"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Date" prefWidth="170">
+                <cellValueFactory><PropertyValueFactory property="paymentDate"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Remarks" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="remarks"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</VBox>

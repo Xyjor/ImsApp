@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="imsapp.controller.LoginController"
+           prefWidth="600" prefHeight="400"
+           styleClass="root-pane">
+
+    <VBox alignment="CENTER" spacing="25" maxWidth="350" maxHeight="400" styleClass="form-container">
+        <padding><Insets top="40" right="30" bottom="40" left="30"/></padding>
+        
+        <VBox alignment="CENTER" spacing="5">
+            <FontAwesomeIconView glyphName="USER_CIRCLE" size="3em" fill="#e94560"/>
+            <Label text="IMS LOGIN" styleClass="title-label"/>
+            <Label text="Vehicle &amp; Driver Information System" textFill="gray"/>
+        </VBox>
+        
+        <VBox spacing="15">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <FontAwesomeIconView glyphName="USER" size="1.5em" fill="#a8b2d1"/>
+                <TextField fx:id="txtUsername" promptText="Username" HBox.hgrow="ALWAYS" styleClass="jfx-input"/>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <FontAwesomeIconView glyphName="LOCK" size="1.5em" fill="#a8b2d1"/>
+                <PasswordField fx:id="txtPassword" promptText="Password" HBox.hgrow="ALWAYS" styleClass="jfx-input"/>
+            </HBox>
+        </VBox>
+        
+        <Label fx:id="lblError" textFill="#ff6b81" visible="false"/>
+        
+        <Button text="LOGIN" onAction="#handleLogin" styleClass="btn-primary" maxWidth="Infinity">
+            <VBox.margin><Insets top="10"/></VBox.margin>
+        </Button>
+    </VBox>
+</StackPane>

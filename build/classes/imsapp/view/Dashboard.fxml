@@ -3,57 +3,94 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="imsapp.controller.DashboardController"
-            prefWidth="1100" prefHeight="700"
-            styleClass="root-pane">
+            prefWidth="1200" prefHeight="720"
+            styleClass="root-pane"
+            stylesheets="@../css/style.css">
 
-    <!-- LEFT NAVIGATION PANEL -->
+    <!-- ═══ LEFT SIDEBAR ═══ -->
     <left>
-        <VBox styleClass="nav-panel" spacing="4" prefWidth="220">
-            <padding><Insets top="20" right="10" bottom="20" left="10"/></padding>
+        <VBox fx:id="navPanel" styleClass="nav-panel" spacing="2" prefWidth="230">
+            <padding><Insets top="20" right="12" bottom="16" left="12"/></padding>
 
-            <Label text="Vehicle &amp; Driver IMS" styleClass="nav-title"/>
-            <Separator/>
+            <!-- Brand -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <StackPane style="-fx-background-color:rgba(59,130,246,0.12);-fx-background-radius:8;-fx-padding:8;">
+                    <FontAwesomeIconView glyphName="CAR" size="1.3em" fill="#3b82f6"/>
+                </StackPane>
+                <VBox spacing="1">
+                    <Label text="IMS Portal" styleClass="nav-title"/>
+                    <Label text="v3.0 — Enterprise" styleClass="nav-version"/>
+                </VBox>
+            </HBox>
 
+            <VBox.margin><Insets bottom="8"/></VBox.margin>
             <Separator/>
-            
+            <VBox.margin><Insets top="0" bottom="4"/></VBox.margin>
+
+            <!-- Section label -->
+            <Label text="DATA MODULES" styleClass="nav-section-label"/>
+
+            <!-- Nav buttons -->
             <Button fx:id="btnCustomers" text=" Customers" styleClass="nav-button"
                     onAction="#handleNavCustomers" maxWidth="Infinity">
-                <graphic><FontAwesomeIconView glyphName="USERS" size="1.2em" fill="#a8b2d1"/></graphic>
+                <graphic><FontAwesomeIconView glyphName="USERS" size="1.1em" fill="#334155"/></graphic>
             </Button>
             <Button fx:id="btnLicenses" text=" Driver's License" styleClass="nav-button"
                     onAction="#handleNavLicenses" maxWidth="Infinity">
-                <graphic><FontAwesomeIconView glyphName="ID_CARD" size="1.2em" fill="#a8b2d1"/></graphic>
+                <graphic><FontAwesomeIconView glyphName="ID_CARD" size="1.1em" fill="#334155"/></graphic>
             </Button>
             <Button fx:id="btnVehicles" text=" Vehicles / OR-CR" styleClass="nav-button"
                     onAction="#handleNavVehicles" maxWidth="Infinity">
-                <graphic><FontAwesomeIconView glyphName="CAR" size="1.2em" fill="#a8b2d1"/></graphic>
+                <graphic><FontAwesomeIconView glyphName="CAR" size="1.1em" fill="#334155"/></graphic>
             </Button>
             <Button fx:id="btnPayments" text=" Payments" styleClass="nav-button"
                     onAction="#handleNavPayments" maxWidth="Infinity">
-                <graphic><FontAwesomeIconView glyphName="CREDIT_CARD" size="1.2em" fill="#a8b2d1"/></graphic>
+                <graphic><FontAwesomeIconView glyphName="CREDIT_CARD" size="1.1em" fill="#334155"/></graphic>
             </Button>
 
+            <!-- Admin section -->
+            <Label text="ADMINISTRATION" styleClass="nav-section-label" fx:id="lblAdminSection"/>
+            <Button fx:id="btnUsers" text=" User Management" styleClass="nav-button"
+                    onAction="#handleNavUsers" maxWidth="Infinity">
+                <graphic><FontAwesomeIconView glyphName="SHIELD" size="1.1em" fill="#1e4060"/></graphic>
+            </Button>
+
+            <!-- Push to bottom -->
             <Region VBox.vgrow="ALWAYS"/>
 
+            <!-- Logout -->
             <Button text=" Logout" styleClass="nav-button, logout-button"
                     onAction="#handleLogout" maxWidth="Infinity">
-                <graphic><FontAwesomeIconView glyphName="SIGN_OUT" size="1.2em" fill="#ff6b81"/></graphic>
+                <graphic><FontAwesomeIconView glyphName="SIGN_OUT" size="1.1em" fill="#374151"/></graphic>
             </Button>
 
-            <Separator/>
-            <Label text="© 2026 Xyjor" styleClass="nav-footer"/>
+            <!-- User card -->
+            <VBox styleClass="user-card" spacing="2">
+                <VBox.margin><Insets top="8"/></VBox.margin>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <StackPane style="-fx-background-color:rgba(59,130,246,0.15);-fx-background-radius:16;-fx-padding:6;">
+                        <FontAwesomeIconView glyphName="USER" size="0.9em" fill="#3b82f6"/>
+                    </StackPane>
+                    <VBox spacing="1">
+                        <Label fx:id="lblUserName" text="Loading..." styleClass="user-card-name"/>
+                        <Label fx:id="lblUserRole" text="" styleClass="user-card-role"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <Label text="© 2026 Xyjor Corporation" styleClass="nav-footer"/>
         </VBox>
     </left>
 
-    <!-- CENTER CONTENT AREA (swapped dynamically) -->
+    <!-- ═══ CENTER CONTENT ═══ -->
     <center>
         <StackPane fx:id="contentArea" styleClass="content-area">
-            <!-- Content loaded via Controller -->
+            <!-- Views are loaded dynamically by DashboardController -->
         </StackPane>
     </center>
+
 </BorderPane>

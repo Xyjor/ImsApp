@@ -118,14 +118,20 @@ CREATE INDEX idx_payment_date     ON payments(payment_date);
 -- USERS TABLE (Authentication & Roles)
 -- ============================================================
 CREATE TABLE IF NOT EXISTS users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
+    user_id       INT AUTO_INCREMENT PRIMARY KEY,
+    username      VARCHAR(50)  NOT NULL UNIQUE,
+    full_name     VARCHAR(100),
     password_hash VARCHAR(255) NOT NULL,
-    role VARCHAR(20) NOT NULL, -- 'ADMIN' or 'STAFF'
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    role          VARCHAR(20)  NOT NULL,  -- 'ADMIN' or 'STAFF'
+    is_active     TINYINT(1)   NOT NULL DEFAULT 1,
+    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert a default admin account (Password is 'admin123')
--- Note: In a real app, use bcrypt hashing. For simplicity here, we use plain or simple hashing.
-INSERT IGNORE INTO users (username, password_hash, role) VALUES ('admin', 'admin123', 'ADMIN');
+-- Insert a default admin account
+-- Password is 'admin123', stored as its SHA-256 hex digest.
+-- SHA-256('admin123') = 240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9
+-- Run this UPDATE if you already have the old plain-text row:
+--   UPDATE users SET password_hash='240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9' WHERE username='admin';
+INSERT IGNORE INTO users (username, password_hash, role)
+VALUES ('admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'ADMIN');
 

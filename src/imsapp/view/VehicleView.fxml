@@ -4,113 +4,164 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="imsapp.controller.VehicleController"
-      spacing="16" styleClass="module-pane">
-    <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+      spacing="0" styleClass="module-pane">
+    <padding><Insets top="22" right="24" bottom="16" left="24"/></padding>
 
-    <Label text="Vehicle Registration (OR/CR)" styleClass="module-title"/>
+    <!-- PAGE HEADER -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <StackPane style="-fx-background-color:rgba(59,130,246,0.1);-fx-background-radius:8;-fx-padding:8;">
+            <FontAwesomeIconView glyphName="CAR" size="1.2em" fill="#3b82f6"/>
+        </StackPane>
+        <VBox spacing="2">
+            <Label text="Vehicle Registration (OR/CR)" styleClass="module-title"/>
+            <Label fx:id="lblMode" text="＋  New Record" styleClass="mode-label"/>
+        </VBox>
+    </HBox>
+    <VBox.margin><Insets bottom="14"/></VBox.margin>
 
-    <GridPane hgap="12" vgap="10" styleClass="form-grid">
-        <Label text="Owner Details" styleClass="section-header" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
-        
-        <Label text="Customer:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <ComboBox fx:id="cmbCustomer" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="250"/>
+    <!-- FORM CARD -->
+    <VBox styleClass="form-card" spacing="0">
+        <VBox.margin><Insets bottom="12"/></VBox.margin>
 
-        <Label text="Vehicle Specifications" styleClass="section-header" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="4">
-            <GridPane.margin><Insets top="10"/></GridPane.margin>
-        </Label>
-        
-        <Label text="Plate No:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtPlateNo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <Label text="OWNER &amp; REGISTRATION" styleClass="section-header"/>
 
-        <Label text="Make:" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
-        <TextField fx:id="txtMake" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
-        
-        <Label text="Model:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtModel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        <GridPane hgap="14" vgap="8" styleClass="form-grid">
+            <VBox.margin><Insets top="8"/></VBox.margin>
 
-        <Label text="Year:" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
-        <TextField fx:id="txtYear" GridPane.rowIndex="4" GridPane.columnIndex="3"/>
-        
-        <Label text="Color:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtColor" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-        
-        <Label text="Fuel Type:" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
-        <ComboBox fx:id="cmbFuelType" GridPane.rowIndex="5" GridPane.columnIndex="3" prefWidth="200"/>
+            <Label text="Customer" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="cmbCustomer" promptText="Select customer owner"
+                      GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3"
+                      prefWidth="Infinity" maxWidth="Infinity"/>
 
-        <Label text="Registration &amp; Identifiers" styleClass="section-header" GridPane.rowIndex="6" GridPane.columnIndex="0" GridPane.columnSpan="4">
-            <GridPane.margin><Insets top="10"/></GridPane.margin>
-        </Label>
+            <Label text="VEHICLE DETAILS" styleClass="section-header"
+                   GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
 
-        <Label text="Engine No:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtEngineNo" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
-        
-        <Label text="Chassis No:" GridPane.rowIndex="7" GridPane.columnIndex="2"/>
-        <TextField fx:id="txtChassisNo" GridPane.rowIndex="7" GridPane.columnIndex="3"/>
+            <Label text="Plate Number" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtPlateNo" promptText="e.g. ABC 1234"
+                       GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="180"/>
 
-        <Label text="OR No:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtOrNo" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
-        
-        <Label text="CR No:" GridPane.rowIndex="8" GridPane.columnIndex="2"/>
-        <TextField fx:id="txtCrNo" GridPane.rowIndex="8" GridPane.columnIndex="3"/>
+            <Label text="Make / Brand" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+            <TextField fx:id="txtMake" promptText="e.g. Toyota"
+                       GridPane.rowIndex="2" GridPane.columnIndex="3" prefWidth="180"/>
 
-        <Label text="Status:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
-        <ComboBox fx:id="cmbStatus" GridPane.rowIndex="9" GridPane.columnIndex="1" prefWidth="200"/>
-    </GridPane>
+            <Label text="Model" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtModel" promptText="e.g. Vios"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="180"/>
 
-    <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Year" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+            <TextField fx:id="txtYear" promptText="e.g. 2023"
+                       GridPane.rowIndex="3" GridPane.columnIndex="3" prefWidth="180"/>
+
+            <Label text="Color" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtColor" promptText="e.g. Silver"
+                       GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="180"/>
+
+            <Label text="Fuel Type" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+            <ComboBox fx:id="cmbFuelType" promptText="Select fuel type"
+                      GridPane.rowIndex="4" GridPane.columnIndex="3" prefWidth="180"/>
+
+            <Label text="ENGINE &amp; DOCUMENTS" styleClass="section-header"
+                   GridPane.rowIndex="5" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
+
+            <Label text="Engine No." GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtEngineNo" promptText="Engine number"
+                       GridPane.rowIndex="6" GridPane.columnIndex="1" prefWidth="180"/>
+
+            <Label text="Chassis No." GridPane.rowIndex="6" GridPane.columnIndex="2"/>
+            <TextField fx:id="txtChassisNo" promptText="Chassis number"
+                       GridPane.rowIndex="6" GridPane.columnIndex="3" prefWidth="180"/>
+
+            <Label text="OR Number" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtOrNo" promptText="Official Receipt No."
+                       GridPane.rowIndex="7" GridPane.columnIndex="1" prefWidth="180"/>
+
+            <Label text="CR Number" GridPane.rowIndex="7" GridPane.columnIndex="2"/>
+            <TextField fx:id="txtCrNo" promptText="Certificate of Reg. No."
+                       GridPane.rowIndex="7" GridPane.columnIndex="3" prefWidth="180"/>
+
+            <Label text="VALIDITY" styleClass="section-header"
+                   GridPane.rowIndex="8" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
+
+            <Label text="Registration Date" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="dpRegistrationDate" GridPane.rowIndex="9" GridPane.columnIndex="1" prefWidth="180"/>
+
+            <Label text="Expiry Date" GridPane.rowIndex="9" GridPane.columnIndex="2"/>
+            <DatePicker fx:id="dpExpiryDate" GridPane.rowIndex="9" GridPane.columnIndex="3" prefWidth="180"/>
+
+            <Label text="Status" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="cmbStatus" promptText="Select status"
+                      GridPane.rowIndex="10" GridPane.columnIndex="1" prefWidth="180"/>
+
+            <columnConstraints>
+                <ColumnConstraints minWidth="110" prefWidth="130"/>
+                <ColumnConstraints hgrow="ALWAYS" fillWidth="true"/>
+                <ColumnConstraints minWidth="110" prefWidth="130"/>
+                <ColumnConstraints hgrow="ALWAYS" fillWidth="true"/>
+            </columnConstraints>
+        </GridPane>
+    </VBox>
+
+    <!-- ACTION BAR -->
+    <HBox spacing="8" alignment="CENTER_LEFT" styleClass="action-bar">
+        <VBox.margin><Insets bottom="10"/></VBox.margin>
         <Button text=" Save" styleClass="btn-primary" onAction="#handleSave">
-            <graphic><FontAwesomeIconView glyphName="SAVE" fill="white"/></graphic>
+            <graphic><FontAwesomeIconView glyphName="SAVE" fill="white" size="0.9em"/></graphic>
         </Button>
         <Button text=" Update" styleClass="btn-secondary" onAction="#handleUpdate">
-            <graphic><FontAwesomeIconView glyphName="EDIT" fill="#a8b2d1"/></graphic>
+            <graphic><FontAwesomeIconView glyphName="EDIT" fill="#64748b" size="0.9em"/></graphic>
         </Button>
-        <Button text=" Delete" styleClass="btn-danger" onAction="#handleDelete">
-            <graphic><FontAwesomeIconView glyphName="TRASH" fill="#e94560"/></graphic>
+        <Button fx:id="btnDelete" text=" Delete" styleClass="btn-danger" onAction="#handleDelete">
+            <graphic><FontAwesomeIconView glyphName="TRASH" fill="#6b7280" size="0.9em"/></graphic>
         </Button>
         <Button text=" Clear" styleClass="btn-outline" onAction="#handleClear">
-            <graphic><FontAwesomeIconView glyphName="ERASER" fill="#8892b0"/></graphic>
+            <graphic><FontAwesomeIconView glyphName="ERASER" fill="#374151" size="0.9em"/></graphic>
         </Button>
-        <Button text=" Export CSV" styleClass="btn-secondary" onAction="#handleExport">
-            <graphic><FontAwesomeIconView glyphName="FILE_EXCEL_ALT" fill="#a8b2d1"/></graphic>
+        <Button text=" Export CSV" styleClass="btn-outline" onAction="#handleExport">
+            <graphic><FontAwesomeIconView glyphName="DOWNLOAD" fill="#374151" size="0.9em"/></graphic>
         </Button>
         <Region HBox.hgrow="ALWAYS"/>
-        <HBox alignment="CENTER" spacing="5">
-            <FontAwesomeIconView glyphName="SEARCH" fill="#8892b0"/>
-            <TextField fx:id="txtSearch" promptText="Search Vehicles..." prefWidth="250"/>
+        <HBox styleClass="search-container" alignment="CENTER_LEFT" spacing="6">
+            <FontAwesomeIconView glyphName="SEARCH" fill="#1e3a5f" size="0.85em"/>
+            <TextField fx:id="txtSearch" promptText="Search plate, make, model, status…"
+                       styleClass="search-field" prefWidth="240"/>
         </HBox>
     </HBox>
 
+    <!-- TABLE -->
     <TableView fx:id="tblVehicles" VBox.vgrow="ALWAYS" styleClass="data-table">
         <placeholder>
-            <Label text="No vehicle records found."/>
+            <Label text="No vehicle records yet — fill in the form above and click Save"/>
         </placeholder>
         <columns>
-            <TableColumn text="ID" prefWidth="50">
+            <TableColumn text="ID" prefWidth="45">
                 <cellValueFactory><PropertyValueFactory property="vehicleId"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Plate No" prefWidth="100">
+            <TableColumn text="PLATE NO" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="plateNumber"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Make" prefWidth="100">
+            <TableColumn text="MAKE" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="make"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Model" prefWidth="100">
+            <TableColumn text="MODEL" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="model"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Engine No" prefWidth="130">
-                <cellValueFactory><PropertyValueFactory property="engineNumber"/></cellValueFactory>
+            <TableColumn text="YEAR" prefWidth="58">
+                <cellValueFactory><PropertyValueFactory property="yearModel"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Chassis No" prefWidth="130">
-                <cellValueFactory><PropertyValueFactory property="chassisNumber"/></cellValueFactory>
+            <TableColumn text="OR NO" prefWidth="110">
+                <cellValueFactory><PropertyValueFactory property="orNumber"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Status" prefWidth="100">
+            <TableColumn text="EXPIRY" prefWidth="105">
+                <cellValueFactory><PropertyValueFactory property="expiryDate"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="STATUS" prefWidth="110">
                 <cellValueFactory><PropertyValueFactory property="status"/></cellValueFactory>
             </TableColumn>
         </columns>
     </TableView>
+    <Label fx:id="lblRecordCount" text="" styleClass="record-count-label"/>
 </VBox>

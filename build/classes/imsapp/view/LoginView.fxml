@@ -3,39 +3,66 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="imsapp.controller.LoginController"
-           prefWidth="600" prefHeight="400"
-           styleClass="root-pane">
+           styleClass="login-root"
+           stylesheets="@../css/style.css">
 
-    <VBox alignment="CENTER" spacing="25" maxWidth="350" maxHeight="400" styleClass="form-container">
-        <padding><Insets top="40" right="30" bottom="40" left="30"/></padding>
-        
-        <VBox alignment="CENTER" spacing="5">
-            <FontAwesomeIconView glyphName="USER_CIRCLE" size="3em" fill="#e94560"/>
-            <Label text="IMS LOGIN" styleClass="title-label"/>
-            <Label text="Vehicle &amp; Driver Information System" textFill="gray"/>
+    <!-- Centered login card -->
+    <VBox styleClass="login-card" spacing="0" maxWidth="400" maxHeight="520"
+          alignment="CENTER">
+
+        <!-- Logo + Title -->
+        <VBox alignment="CENTER" spacing="10">
+            <StackPane styleClass="login-logo-box" maxWidth="52" maxHeight="52">
+                <FontAwesomeIconView glyphName="CAR" size="2em" fill="#3b82f6"/>
+            </StackPane>
+            <Label text="Vehicle &amp; Driver IMS" styleClass="login-title"/>
+            <Label text="Information Management System" styleClass="login-subtitle"/>
         </VBox>
-        
-        <VBox spacing="15">
-            <HBox alignment="CENTER_LEFT" spacing="10">
-                <FontAwesomeIconView glyphName="USER" size="1.5em" fill="#a8b2d1"/>
-                <TextField fx:id="txtUsername" promptText="Username" HBox.hgrow="ALWAYS" styleClass="jfx-input"/>
-            </HBox>
-            
-            <HBox alignment="CENTER_LEFT" spacing="10">
-                <FontAwesomeIconView glyphName="LOCK" size="1.5em" fill="#a8b2d1"/>
-                <PasswordField fx:id="txtPassword" promptText="Password" HBox.hgrow="ALWAYS" styleClass="jfx-input"/>
-            </HBox>
+
+        <VBox.margin><Insets bottom="28"/></VBox.margin>
+
+        <!-- Divider -->
+        <Separator styleClass="login-divider"/>
+        <VBox.margin><Insets top="0" bottom="24"/></VBox.margin>
+
+        <!-- Form -->
+        <VBox spacing="16">
+            <!-- Username -->
+            <VBox spacing="4">
+                <Label text="USERNAME" styleClass="login-label"/>
+                <TextField fx:id="txtUsername" promptText="Enter your username"
+                           styleClass="login-field" maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- Password -->
+            <VBox spacing="4">
+                <Label text="PASSWORD" styleClass="login-label"/>
+                <PasswordField fx:id="txtPassword" promptText="Enter your password"
+                               styleClass="login-field" maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- Error label (hidden by default) -->
+            <Label fx:id="lblError" text="" styleClass="login-error"
+                   maxWidth="Infinity" visible="false" managed="false"/>
+
+            <!-- Login button -->
+            <Button text="Sign In" styleClass="login-btn"
+                    onAction="#handleLogin" maxWidth="Infinity"
+                    defaultButton="true">
+                <graphic><FontAwesomeIconView glyphName="SIGN_IN" fill="white" size="1em"/></graphic>
+            </Button>
         </VBox>
-        
-        <Label fx:id="lblError" textFill="#ff6b81" visible="false"/>
-        
-        <Button text="LOGIN" onAction="#handleLogin" styleClass="btn-primary" maxWidth="Infinity">
-            <VBox.margin><Insets top="10"/></VBox.margin>
-        </Button>
+
+        <!-- Footer -->
+        <VBox alignment="CENTER" spacing="2">
+            <VBox.margin><Insets top="28"/></VBox.margin>
+            <Label text="Secure access — SHA-256 protected" styleClass="login-subtitle"/>
+            <Label text="© 2026 Xyjor Corporation" styleClass="login-subtitle"/>
+        </VBox>
+
     </VBox>
 </StackPane>

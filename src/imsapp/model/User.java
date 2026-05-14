@@ -1,17 +1,54 @@
 package imsapp.model;
 
-public class User {
-    private int userId;
-    private String username;
-    private String passwordHash;
-    private String role;
+import javafx.beans.property.*;
 
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-    public String getPasswordHash() { return passwordHash; }
-    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
+/**
+ * Model for an IMS system user (ADMIN or STAFF).
+ */
+public class User {
+
+    private final IntegerProperty userId   = new SimpleIntegerProperty();
+    private final StringProperty  username = new SimpleStringProperty();
+    private final StringProperty  fullName = new SimpleStringProperty();
+    private final StringProperty  passwordHash = new SimpleStringProperty();
+    private final StringProperty  role     = new SimpleStringProperty();
+    private final BooleanProperty active   = new SimpleBooleanProperty(true);
+
+    public User() {}
+
+    // userId
+    public int getUserId() { return userId.get(); }
+    public void setUserId(int v) { userId.set(v); }
+    public IntegerProperty userIdProperty() { return userId; }
+
+    // username
+    public String getUsername() { return username.get(); }
+    public void setUsername(String v) { username.set(v); }
+    public StringProperty usernameProperty() { return username; }
+
+    // fullName
+    public String getFullName() { return fullName.get(); }
+    public void setFullName(String v) { fullName.set(v); }
+    public StringProperty fullNameProperty() { return fullName; }
+
+    // passwordHash
+    public String getPasswordHash() { return passwordHash.get(); }
+    public void setPasswordHash(String v) { passwordHash.set(v); }
+    public StringProperty passwordHashProperty() { return passwordHash; }
+
+    // role
+    public String getRole() { return role.get(); }
+    public void setRole(String v) { role.set(v); }
+    public StringProperty roleProperty() { return role; }
+
+    // active
+    public boolean isActive() { return active.get(); }
+    public void setActive(boolean v) { active.set(v); }
+    public BooleanProperty activeProperty() { return active; }
+
+    @Override
+    public String toString() {
+        String fn = fullName.get();
+        return (fn != null && !fn.isEmpty()) ? fn + " (" + username.get() + ")" : username.get();
+    }
 }

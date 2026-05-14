@@ -4,102 +4,145 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="imsapp.controller.CustomerController"
-      spacing="16" styleClass="module-pane">
-    <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+      spacing="0" styleClass="module-pane">
+    <padding><Insets top="22" right="24" bottom="16" left="24"/></padding>
 
-    <Label text="Customer Records" styleClass="module-title"/>
+    <!-- PAGE HEADER -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <StackPane style="-fx-background-color:rgba(59,130,246,0.1);-fx-background-radius:8;-fx-padding:8;">
+            <FontAwesomeIconView glyphName="USERS" size="1.2em" fill="#3b82f6"/>
+        </StackPane>
+        <VBox spacing="2">
+            <Label text="Customers" styleClass="module-title"/>
+            <Label fx:id="lblMode" text="＋  New Record" styleClass="mode-label"/>
+        </VBox>
+    </HBox>
+    <VBox.margin><Insets bottom="14"/></VBox.margin>
 
-    <!-- FORM -->
-    <GridPane hgap="12" vgap="10" styleClass="form-grid">
-        <Label text="Personal Information" styleClass="section-header" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
-        
-        <Label text="First Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtFirstName" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="200"/>
-        <Label text="Last Name:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-        <TextField fx:id="txtLastName" GridPane.rowIndex="1" GridPane.columnIndex="3" prefWidth="200"/>
+    <!-- FORM CARD -->
+    <VBox styleClass="form-card" spacing="0">
+        <VBox.margin><Insets bottom="12"/></VBox.margin>
 
-        <Label text="Middle Name:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtMiddleName" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-        <Label text="Gender:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
-        <ComboBox fx:id="cmbGender" GridPane.rowIndex="2" GridPane.columnIndex="3" prefWidth="200"/>
+        <Label text="PERSONAL INFORMATION" styleClass="section-header"/>
 
-        <Label text="Date of Birth:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <DatePicker fx:id="dpDateOfBirth" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-        
-        <Label text="Contact &amp; Address Details" styleClass="section-header" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="4">
-            <GridPane.margin><Insets top="10"/></GridPane.margin>
-        </Label>
-        
-        <Label text="Contact No:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtContact" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-        <Label text="Email:" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
-        <TextField fx:id="txtEmail" GridPane.rowIndex="5" GridPane.columnIndex="3"/>
+        <GridPane hgap="14" vgap="8" styleClass="form-grid">
+            <VBox.margin><Insets top="8"/></VBox.margin>
 
-        <Label text="Address:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtAddress" GridPane.rowIndex="6" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+            <Label text="First Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtFirstName" promptText="First name"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="180"/>
 
-        <Label text="City:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtCity" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
-        <Label text="Province:" GridPane.rowIndex="7" GridPane.columnIndex="2"/>
-        <TextField fx:id="txtProvince" GridPane.rowIndex="7" GridPane.columnIndex="3"/>
-        
-        <Label text="Zip Code:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtZipCode" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
-    </GridPane>
+            <Label text="Last Name" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+            <TextField fx:id="txtLastName" promptText="Last name"
+                       GridPane.rowIndex="0" GridPane.columnIndex="3" prefWidth="180"/>
 
-    <!-- BUTTONS & SEARCH -->
-    <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Middle Name" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtMiddleName" promptText="Middle name (optional)"
+                       GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="180"/>
+
+            <Label text="Gender" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+            <ComboBox fx:id="cmbGender" promptText="Select gender"
+                      GridPane.rowIndex="1" GridPane.columnIndex="3" prefWidth="180"/>
+
+            <Label text="Date of Birth" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="dpDateOfBirth" promptText="yyyy-mm-dd"
+                        GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="180"/>
+
+            <Label text="CONTACT DETAILS" styleClass="section-header"
+                   GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
+
+            <Label text="Contact No." GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtContact" promptText="e.g. 09XX-XXX-XXXX"
+                       GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="180"/>
+
+            <Label text="Email" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+            <TextField fx:id="txtEmail" promptText="email@domain.com"
+                       GridPane.rowIndex="4" GridPane.columnIndex="3" prefWidth="180"/>
+
+            <Label text="Address" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtAddress" promptText="Street / Barangay"
+                       GridPane.rowIndex="5" GridPane.columnIndex="1" GridPane.columnSpan="3"
+                       prefWidth="Infinity"/>
+
+            <Label text="City" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtCity" promptText="City / Municipality"
+                       GridPane.rowIndex="6" GridPane.columnIndex="1" prefWidth="180"/>
+
+            <Label text="Province" GridPane.rowIndex="6" GridPane.columnIndex="2"/>
+            <TextField fx:id="txtProvince" promptText="Province"
+                       GridPane.rowIndex="6" GridPane.columnIndex="3" prefWidth="180"/>
+
+            <Label text="ZIP Code" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtZipCode" promptText="Zip"
+                       GridPane.rowIndex="7" GridPane.columnIndex="1" prefWidth="100"/>
+
+            <columnConstraints>
+                <ColumnConstraints minWidth="100" prefWidth="120"/>
+                <ColumnConstraints hgrow="ALWAYS" fillWidth="true"/>
+                <ColumnConstraints minWidth="100" prefWidth="120"/>
+                <ColumnConstraints hgrow="ALWAYS" fillWidth="true"/>
+            </columnConstraints>
+        </GridPane>
+    </VBox>
+
+    <!-- ACTION BAR -->
+    <HBox spacing="8" alignment="CENTER_LEFT" styleClass="action-bar">
+        <VBox.margin><Insets bottom="10"/></VBox.margin>
         <Button text=" Save" styleClass="btn-primary" onAction="#handleSave">
-            <graphic><FontAwesomeIconView glyphName="SAVE" fill="white"/></graphic>
+            <graphic><FontAwesomeIconView glyphName="SAVE" fill="white" size="0.9em"/></graphic>
         </Button>
         <Button text=" Update" styleClass="btn-secondary" onAction="#handleUpdate">
-            <graphic><FontAwesomeIconView glyphName="EDIT" fill="#a8b2d1"/></graphic>
+            <graphic><FontAwesomeIconView glyphName="EDIT" fill="#64748b" size="0.9em"/></graphic>
         </Button>
-        <Button text=" Delete" styleClass="btn-danger" onAction="#handleDelete">
-            <graphic><FontAwesomeIconView glyphName="TRASH" fill="#e94560"/></graphic>
+        <Button fx:id="btnDelete" text=" Delete" styleClass="btn-danger" onAction="#handleDelete">
+            <graphic><FontAwesomeIconView glyphName="TRASH" fill="#6b7280" size="0.9em"/></graphic>
         </Button>
         <Button text=" Clear" styleClass="btn-outline" onAction="#handleClear">
-            <graphic><FontAwesomeIconView glyphName="ERASER" fill="#8892b0"/></graphic>
+            <graphic><FontAwesomeIconView glyphName="ERASER" fill="#374151" size="0.9em"/></graphic>
         </Button>
-        <Button text=" Export CSV" styleClass="btn-secondary" onAction="#handleExport">
-            <graphic><FontAwesomeIconView glyphName="FILE_EXCEL_ALT" fill="#a8b2d1"/></graphic>
+        <Button text=" Export CSV" styleClass="btn-outline" onAction="#handleExport">
+            <graphic><FontAwesomeIconView glyphName="DOWNLOAD" fill="#374151" size="0.9em"/></graphic>
         </Button>
         <Region HBox.hgrow="ALWAYS"/>
-        <HBox alignment="CENTER" spacing="5">
-            <FontAwesomeIconView glyphName="SEARCH" fill="#8892b0"/>
-            <TextField fx:id="txtSearch" promptText="Search Customers..." prefWidth="250"/>
+        <HBox styleClass="search-container" alignment="CENTER_LEFT" spacing="6">
+            <FontAwesomeIconView glyphName="SEARCH" fill="#1e3a5f" size="0.85em"/>
+            <TextField fx:id="txtSearch" promptText="Search by name, contact, email…"
+                       styleClass="search-field" prefWidth="240"/>
         </HBox>
     </HBox>
 
     <!-- TABLE -->
     <TableView fx:id="tblCustomers" VBox.vgrow="ALWAYS" styleClass="data-table">
         <placeholder>
-            <Label text="No customer records found."/>
+            <Label text="No customer records yet — fill in the form above and click Save"/>
         </placeholder>
         <columns>
-            <TableColumn text="ID" prefWidth="50">
+            <TableColumn text="ID" prefWidth="48">
                 <cellValueFactory><PropertyValueFactory property="customerId"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Last Name" prefWidth="120">
+            <TableColumn text="LAST NAME" prefWidth="140">
                 <cellValueFactory><PropertyValueFactory property="lastName"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="First Name" prefWidth="120">
+            <TableColumn text="FIRST NAME" prefWidth="130">
                 <cellValueFactory><PropertyValueFactory property="firstName"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Gender" prefWidth="80">
+            <TableColumn text="GENDER" prefWidth="75">
                 <cellValueFactory><PropertyValueFactory property="gender"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Contact" prefWidth="120">
+            <TableColumn text="CONTACT" prefWidth="130">
                 <cellValueFactory><PropertyValueFactory property="contactNumber"/></cellValueFactory>
             </TableColumn>
-            <TableColumn text="Address" prefWidth="200">
-                <cellValueFactory><PropertyValueFactory property="address"/></cellValueFactory>
+            <TableColumn text="EMAIL" prefWidth="190">
+                <cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="CITY" prefWidth="110">
+                <cellValueFactory><PropertyValueFactory property="city"/></cellValueFactory>
             </TableColumn>
         </columns>
     </TableView>
+    <Label fx:id="lblRecordCount" text="" styleClass="record-count-label"/>
 </VBox>
